@@ -6,7 +6,7 @@ import psycopg2
 from fastapi.responses import JSONResponse
 import random
 
-headers = {"Access-Control-Allow-Origin":"*"}
+
 app = FastAPI()
 
 conn = psycopg2.connect(dbname="d88b17qa0na59j", host="ec2-34-253-148-186.eu-west-1.compute.amazonaws.com", user="parcwjlwsvhmfh", password="a552d46d7f7a144c6e344530d727d46939c9c4d5588bf470c37ec4b37d7767b1")
@@ -56,7 +56,7 @@ async def get_all_plans_random():
     plans_list = []
     for plan in plans:
         plans_list.append({"id: ":plan[0], "nom: ":plan[1], "url: ":plan[2], "obj_img: ":plan[3], "materiel: ":plan[4]})
-	return JSONResponse(random.choice(plans_list), headers=headers)
+	return JSONResponse(random.choice(plans_list))
 
 @app.get("/key_word/filament/{nomfilament}")
 async def get_filament_from_keywords(nomfilament):
