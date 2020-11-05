@@ -56,7 +56,7 @@ async def get_all_plans_random():
     plans_list = []
     for plan in plans:
         plans_list.append({"id: ":plan[0], "nom: ":plan[1], "url: ":plan[2], "obj_img: ":plan[3], "materiel: ":plan[4]})
-	return JSONResponse(random.choice(plans_list))
+    return JSONResponse(random.choice(plans_list))
 
 @app.get("/key_word/filament/{nomfilament}")
 async def get_filament_from_keywords(nomfilament):
@@ -71,8 +71,7 @@ async def get_filament_from_keywords(nomfilament):
 	)
 	filament = cursor.fetchall()
 	if filament :
-		headers = {"Access-Control-Allow-Origin":"*"}
-		return JSONResponse(filament, headers=headers)
+		return filament
 	else :
 		return f"Aucun fil nommé {nomfilament}. Êtes-vous sûr-e-s de l'orthographe?"
 
@@ -89,8 +88,7 @@ async def get_glossaire_from_keywords(mot_glossaire):
 	)
 	mot = cursor.fetchall()
 	if mot :
-		headers = {"Access-Control-Allow-Origin":"*"}
-		return JSONResponse(mot, headers=headers)
+		return mot
 	else :
 		return f"Aucun {mot_glossaire} dans le glossaire. Êtes-vous sûr-e-s de l'orthographe?"
 
@@ -105,10 +103,9 @@ async def get_video_from_keywords(video_key):
 			ON videos_key.videos_id = videos.id 
 		WHERE key_word.words LIKE '%{video_key}%';"""
 	)
-	video = cursor.fetchall()
-	if video :
-		headers = {"Access-Control-Allow-Origin":"*"}
-		return JSONResponse(video, headers=headers)
+	mot = cursor.fetchall()
+	if mot :
+		return mot
 	else :
 		return f"Impossible de trouver {video_key}! Êtes-vous sûr-e-s de l'orthographe?"
 
@@ -124,10 +121,9 @@ async def get_plan_from_keywords(fil):
 		WHERE words LIKE '%{fil}%';
 		"""
 	)
-	plan = cursor.fetchall()
-	if plan :
-		headers = {"Access-Control-Allow-Origin":"*"}
-		return JSONResponse(plan, headers=headers)
+	mot = cursor.fetchall()
+	if mot :
+		return mot
 	else :
 		return f"Aucun {fil} ne correspond au terme précisé dans les plans. Êtes-vous sûr-e-s de l'orthographe?"
 
