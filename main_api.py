@@ -54,11 +54,10 @@ async def get_all_plans_random():
     cursor.execute("""SELECT index, name, absolute_url, obj_img, material from plans;""")
     plans = cursor.fetchall()
     plans_list = []
+	headers = {"Access-Control-Allow-Origin":"*"}
     for plan in plans:
-        plans_list.append({"id: ":plan[0], "nom: ":plan[1], "url: ":plan[2], "obj_img: ":plan[3], "materiel: ":plan[4]})
-    headers = {"Access-Control-Allow-Origin":"*"}
-	random = random.choice(plans_list)
-	return JSONResponse(content = random, headers = headers)
+    	plans_list.append({"id: ":plan[0], "nom: ":plan[1], "url: ":plan[2], "obj_img: ":plan[3], "materiel: ":plan[4]})
+	return JSONResponse(content =random.choice(plans_list), headers = headers)
 
 @app.get("/key_word/filament/{nomfilament}")
 async def get_filament_from_keywords(nomfilament):
