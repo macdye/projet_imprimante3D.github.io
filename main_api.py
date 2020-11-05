@@ -15,7 +15,9 @@ cursor = conn.cursor()
 
 @app.get("/")
 async def root():
-	return {"message": "Bienvenue sur l'API des Imprimantes 3D!"}
+	message = "Bienvenue sur l'API des Imprimantes 3D!"
+	headers = {"Access-Control-Allow-Origin":"*"}
+	return JSONResponse(message, headers=headers)
 
 @app.get("/videos")
 async def get_all_videos():
@@ -24,7 +26,8 @@ async def get_all_videos():
 	video_list = []
 	for video in videos:
 		video_list.append({"id: ":video[0], "titre: ":video[1], "publiée le: ":video[2], "durée: ":video[3], "mots-clés: ":video[4], "lien: ":video[5]})
-	return JSONResponse(video_list)
+	headers = {"Access-Control-Allow-Origin":"*"}
+	return JSONResponse(video_list, headers=headers)
 
 @app.get("/filaments")
 async def get_all_filaments():
@@ -33,7 +36,8 @@ async def get_all_filaments():
 	filaments_list = []
 	for fils in filaments:
 		filaments_list.append({"id: ":fils[0], "nom: ":fils[1], "description: ":fils[2], "temp. extrusion: ":fils[3], "temp. plateau: ":fils[4], "vitesse impr.: ":fils[5]})
-	return JSONResponse(filaments_list)
+	headers = {"Access-Control-Allow-Origin":"*"}
+	return JSONResponse(filaments_list, headers=headers)
 
 @app.get('/plans')
 async def get_all_plans():
@@ -42,7 +46,8 @@ async def get_all_plans():
 	plans_list = []
 	for plan in plans:
 		plans_list.append({"id: ":plan[0], "nom: ":plan[1], "url: ":plan[2], "obj_img: ":plan[3], "materiel: ":plan[4]})
-	return JSONResponse(plans_list)
+	headers = {"Access-Control-Allow-Origin":"*"}
+	return JSONResponse(plans_list, headers=headers)
 
 @app.get('/plans/random')
 async def get_all_plans_random():
@@ -51,7 +56,8 @@ async def get_all_plans_random():
     plans_list = []
     for plan in plans:
         plans_list.append({"id: ":plan[0], "nom: ":plan[1], "url: ":plan[2], "obj_img: ":plan[3], "materiel: ":plan[4]})
-    return JSONResponse(random.choice(plans_list))
+    headers = {"Access-Control-Allow-Origin":"*"}
+	return JSONResponse(random.choice(plans_list), headers=headers)
 
 @app.get("/key_word/filament/{nomfilament}")
 async def get_filament_from_keywords(nomfilament):
