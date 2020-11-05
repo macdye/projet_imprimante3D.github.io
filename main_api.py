@@ -17,7 +17,7 @@ cursor = conn.cursor()
 async def root():
 	message = "Bienvenue sur l'API des Imprimantes 3D!"
 	headers = {"Access-Control-Allow-Origin":"*"}
-	return JSONResponse(video_list, , headers=headers)
+	return JSONResponse(video_list, headers=headers)
 
 @app.get("/videos")
 async def get_all_videos():
