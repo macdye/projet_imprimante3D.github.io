@@ -71,7 +71,8 @@ async def get_filament_from_keywords(nomfilament):
 	)
 	filament = cursor.fetchall()
 	if filament :
-		return filament
+		headers = {"Access-Control-Allow-Origin":"*"}
+		return JSONResponse(filament, headers=headers)
 	else :
 		return f"Aucun fil nommé {nomfilament}. Êtes-vous sûr-e-s de l'orthographe?"
 
@@ -88,7 +89,8 @@ async def get_glossaire_from_keywords(mot_glossaire):
 	)
 	mot = cursor.fetchall()
 	if mot :
-		return mot
+		headers = {"Access-Control-Allow-Origin":"*"}
+		return JSONResponse(mot, headers=headers)
 	else :
 		return f"Aucun {mot_glossaire} dans le glossaire. Êtes-vous sûr-e-s de l'orthographe?"
 
@@ -103,9 +105,10 @@ async def get_video_from_keywords(video_key):
 			ON videos_key.videos_id = videos.id 
 		WHERE key_word.words LIKE '%{video_key}%';"""
 	)
-	mot = cursor.fetchall()
-	if mot :
-		return mot
+	video = cursor.fetchall()
+	if video :
+		headers = {"Access-Control-Allow-Origin":"*"}
+		return JSONResponse(video, headers=headers)
 	else :
 		return f"Impossible de trouver {video_key}! Êtes-vous sûr-e-s de l'orthographe?"
 
@@ -121,9 +124,10 @@ async def get_plan_from_keywords(fil):
 		WHERE words LIKE '%{fil}%';
 		"""
 	)
-	mot = cursor.fetchall()
-	if mot :
-		return mot
+	plan = cursor.fetchall()
+	if plan :
+		headers = {"Access-Control-Allow-Origin":"*"}
+		return JSONResponse(plan, headers=headers)
 	else :
 		return f"Aucun {fil} ne correspond au terme précisé dans les plans. Êtes-vous sûr-e-s de l'orthographe?"
 
