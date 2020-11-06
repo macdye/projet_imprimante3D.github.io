@@ -1,6 +1,0 @@
-fastapi
-uvicorn
-BeautifulSoup4
-pandas
-numpy
-psycopg2
