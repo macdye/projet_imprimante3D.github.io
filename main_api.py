@@ -75,7 +75,8 @@ async def get_filament_from_keywords(nomfilament):
 		headers = {"Access-Control-Allow-Origin":"*"}
 		return JSONResponse(filament, headers=headers)
 	else :
-		return f"Aucun fil nommé {nomfilament}. Êtes-vous sûr-e-s de l'orthographe?"
+		error_message = f"Aucun fil nommé {nomfilament}. Êtes-vous sûr-e-s de l'orthographe?"
+		return JSONResponse(error_message, headers=headers)
 
 @app.get("/key_word/glossaire/{mot_glossaire}")
 async def get_glossaire_from_keywords(mot_glossaire):
@@ -93,7 +94,8 @@ async def get_glossaire_from_keywords(mot_glossaire):
 		headers = {"Access-Control-Allow-Origin":"*"}
 		return JSONResponse(mot, headers=headers)
 	else :
-		return f"Aucun {mot_glossaire} dans le glossaire. Êtes-vous sûr-e-s de l'orthographe?"
+		error_message = f"Aucun {mot_glossaire} dans le glossaire. Êtes-vous sûr-e-s de l'orthographe?"
+		return JSONResponse(error_message, headers=headers)
 
 @app.get("/key_word/videos/{video_key}")
 async def get_video_from_keywords(video_key):
@@ -111,7 +113,8 @@ async def get_video_from_keywords(video_key):
 		headers = {"Access-Control-Allow-Origin":"*"}
 		return JSONResponse(video, headers=headers)
 	else :
-		return f"Impossible de trouver {video_key}! Êtes-vous sûr-e-s de l'orthographe?"
+		error_message = f"Impossible de trouver {video_key}! Êtes-vous sûr-e-s de l'orthographe?"
+		return JSONResponse(error_message, headers=headers)
 
 @app.get("/plans/materiel/{fil}")
 async def get_plan_from_keywords(fil):
@@ -130,7 +133,8 @@ async def get_plan_from_keywords(fil):
 		headers = {"Access-Control-Allow-Origin":"*"}
 		return JSONResponse(plan, headers=headers)
 	else :
-		return f"Aucun {fil} ne correspond au terme précisé dans les plans. Êtes-vous sûr-e-s de l'orthographe?"
+		error_message = f"Aucun {fil} ne correspond au terme précisé dans les plans. Êtes-vous sûr-e-s de l'orthographe?"
+		return JSONResponse(error_message, headers=headers)
 
 if __name__ == "__main__":
 	uvicorn.run(app, host="0.0.0.0", port=8000)
